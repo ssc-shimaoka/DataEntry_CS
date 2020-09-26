@@ -1,0 +1,12 @@
+C:\VS2019\DataEntry_CS\DataEntry_CS\obj\Debug\DataEntry_CS.csprojAssemblyReference.cache
+C:\VS2019\DataEntry_CS\DataEntry_CS\obj\Debug\DataEntry_CS.csproj.CoreCompileInputs.cache
+C:\VS2019\DataEntry_CS\DataEntry_CS\bin\Debug\DataEntry_CS.exe.config
+C:\VS2019\DataEntry_CS\DataEntry_CS\bin\Debug\DataEntry_CS.exe
+C:\VS2019\DataEntry_CS\DataEntry_CS\bin\Debug\DataEntry_CS.pdb
+C:\VS2019\DataEntry_CS\DataEntry_CS\bin\Debug\EntityFramework.dll
+C:\VS2019\DataEntry_CS\DataEntry_CS\bin\Debug\EntityFramework.SqlServer.dll
+C:\VS2019\DataEntry_CS\DataEntry_CS\bin\Debug\EntityFramework.xml
+C:\VS2019\DataEntry_CS\DataEntry_CS\bin\Debug\EntityFramework.SqlServer.xml
+C:\VS2019\DataEntry_CS\DataEntry_CS\obj\Debug\DataEntry_CS.csproj.CopyComplete
+C:\VS2019\DataEntry_CS\DataEntry_CS\obj\Debug\DataEntry_CS.exe
+C:\VS2019\DataEntry_CS\DataEntry_CS\obj\Debug\DataEntry_CS.pdb
