@@ -8,8 +8,11 @@ namespace DataEntry_CS
 {
     public class controller
     {
-
-        // 各種情報入力処理
+        /// <summary>
+        /// 各種情報入力処理
+        /// </summary>
+        /// <param name="humaninfo"></param>
+        /// <returns></returns>
         public static bool InputData(Models.HumanInfo humaninfo)
         {
             // 会社名入力
@@ -63,6 +66,47 @@ namespace DataEntry_CS
         }
 
         /// <summary>
+        /// 変更処理
+        /// </summary>
+        /// <param name="humaninfo"></param>
+        /// <returns></returns>
+        public static bool ChangeData(Models.HumanInfo humaninfo)
+        {
+            // 変更箇所選択
+            var itemnumber = inputIntCommon(resource.ADD_SELECTITEM_TEXT);
+
+            switch (itemnumber)
+            {
+                case 1:
+                    humaninfo.CompanyName = inputStringCommon(resource.CHANGE_COMPANYNAME_TEXT, humaninfo.CompanyName);
+                    break;
+                case 2:
+                    humaninfo.Department = inputStringCommon(resource.CHANGE_DEPARTMENT_TEXT, humaninfo.Department);
+                    break;
+                case 3:
+                    humaninfo.Position = inputStringCommon(resource.CHANGE_POSITION_TEXT, humaninfo.Position);
+                    break;
+                case 4:
+                    humaninfo.Name = inputStringCommon(resource.CHANGE_NAME_TEXT, humaninfo.Name);
+                    break;
+                case 5:
+                    humaninfo.ReadingKana = inputStringCommon(resource.CHANGE_READINGKANA_TEXT, humaninfo.ReadingKana);
+                    break;
+                case 6:
+                    humaninfo.Old = inputIntCommon(resource.CHANGE_OLD_TEXT, humaninfo.Old);
+                    break;
+                default:
+                    return false;
+
+            }
+
+
+            return true;
+        }
+
+
+
+        /// <summary>
         /// データ入力共通処理（文字列）
         /// </summary>
         /// <param name="inputText">メッセージ文章</param>
@@ -77,6 +121,25 @@ namespace DataEntry_CS
 
             return res;
         }
+
+
+        /// <summary>
+        /// データ入力共通処理（文字列）オーバーライド
+        /// </summary>
+        /// <param name="inputText">メッセージ文章</param>
+        /// <returns></returns>
+        public static string inputStringCommon(string inputText, string item)
+        {
+            // 文章出力
+            Console.WriteLine(inputText,item);
+
+            // 入力
+            var res = Console.ReadLine() ?? null;
+
+            return res;
+        }
+
+
 
 
         /// <summary>
@@ -96,6 +159,21 @@ namespace DataEntry_CS
         }
 
 
+        /// <summary>
+        /// データ入力共通処理（数値）
+        /// </summary>
+        /// <param name="inputText">メッセージ文章</param>
+        /// <returns></returns>
+        public static int inputIntCommon(string inputText, int item)
+        {
+            // 文章出力
+            Console.WriteLine(inputText,item);
+
+            // 入力
+            var res = int.Parse(Console.ReadLine() ?? null);
+
+            return res;
+        }
 
 
     }

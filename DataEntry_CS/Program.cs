@@ -20,6 +20,9 @@ namespace DataEntry_CS
 
             while(true)
             {
+                // 画面クリア
+                Console.Clear();
+
                 // メインメニュー表示
                 Console.WriteLine(resource.MAINMENU_TEXT);
 
@@ -55,7 +58,6 @@ namespace DataEntry_CS
                         // 終了時処理
 
                         return;
-
                 }
             }
 
@@ -72,56 +74,6 @@ namespace DataEntry_CS
 
             // 各種情報入力処理
             controller.InputData(humaninfo);
-
-            /*
-            // 会社名入力
-            humaninfo.CompanyName = controller.inputStringCommon(resource.ADD_COMPANYNAME_TEXT);
-            // null・から文字列・空白文字列の場合、関数を抜ける
-            if(String.IsNullOrWhiteSpace(humaninfo.CompanyName))
-            {
-                return false;
-            }
-
-            // 部署名入力
-            humaninfo.Department = controller.inputStringCommon(resource.ADD_DEPARTMENT_TEXT);
-            // null・から文字列・空白文字列の場合、関数を抜ける
-            if (String.IsNullOrWhiteSpace(humaninfo.Department))
-            {
-                return false;
-            }
-
-            // 役職名入力
-            humaninfo.Position = controller.inputStringCommon(resource.ADD_POSITION_TEXT);
-            // null・から文字列・空白文字列の場合、関数を抜ける
-            if (String.IsNullOrWhiteSpace(humaninfo.Position))
-            {
-                return false;
-            }
-
-            // 氏名入力
-            humaninfo.Name = controller.inputStringCommon(resource.ADD_NAME_TEXT);
-            // null・から文字列・空白文字列の場合、関数を抜ける
-            if (String.IsNullOrWhiteSpace(humaninfo.Name))
-            {
-                return false;
-            }
-
-            // フリガナ入力
-            humaninfo.ReadingKana = controller.inputStringCommon(resource.ADD_READINGKANA_TEXT);
-            // null・から文字列・空白文字列の場合、関数を抜ける
-            if (String.IsNullOrWhiteSpace(humaninfo.ReadingKana))
-            {
-                return false;
-            }
-
-            // 年齢入力
-            humaninfo.Old = controller.inputIntCommon(resource.ADD_OLD_TEXT);
-            // 0歳の場合、関数を抜ける
-            if (humaninfo.Old == 0)
-            {
-                return false;
-            }
-            */
 
             // DB登録処理
             using (var db = new Models.HumanInfoDbContext())
@@ -150,7 +102,7 @@ namespace DataEntry_CS
             // データ一覧表示
             foreach(var user in users)
             {
-                Console.WriteLine("{0} {1}\n", user.Id, user.Name);
+                Console.WriteLine("{0} {1}", user.Id, user.Name);
             }
 
             // 変更・削除機能選択表示
@@ -179,6 +131,11 @@ namespace DataEntry_CS
             }
         }
 
+        /// <summary>
+        /// 詳細データ表示
+        /// </summary>
+        /// <param name="selectNumber"></param>
+        /// <returns></returns>
         public static bool DispDetails(int selectNumber)
         {
             // input値チェック
@@ -203,7 +160,46 @@ namespace DataEntry_CS
                     Console.WriteLine("部署名：{0}", user.Department);
                     Console.WriteLine("役職名：{0}", user.Position);
                     Console.WriteLine("氏名　：{0}", user.Name);
+                    Console.WriteLine("フリガナ　：{0}", user.ReadingKana);
+                    Console.WriteLine("年齢　：{0}", user.Old);
 
+                    var selectfunc = controller.inputIntCommon(resource.ADD_SELECTFUNCTION_TEXT);
+
+                    // 変更
+                    if(selectfunc == 1)
+                    {
+                        // 画面クリア
+                        Console.Clear();
+
+                        var res = controller.ChangeData(user);
+                        if (res == true)
+                        {
+                            // DB登録処理
+                            using (var db = new Models.HumanInfoDbContext())
+                            {
+                                // DBデータ更新
+                                var humanInfo = db.HumanInfos.Single(x => x.Id == user.Id);
+
+                                humanInfo.CompanyName = user.CompanyName;
+                                humanInfo.Department = user.Department;
+                                humanInfo.Position = user.Position;
+                                humanInfo.Name = user.Name;
+                                humanInfo.ReadingKana = user.ReadingKana;
+                                humanInfo.Old = user.Old;
+
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                    // 削除
+                    else if(selectfunc == 2)
+                    {
+
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
 
